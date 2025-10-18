@@ -28,6 +28,24 @@ services:
     volumes:
       - pgadmin_data:/var/lib/pgadmin
 
+
+  backend:
+    container_name: task_manager_backend
+    build: ./backend
+    ports:
+      - "3000:3000" 
+    depends_on:
+      - postgres_db 
+
+    
+    env_file:
+      - ./backend/.env
+
+    
+    environment:
+    
+      DB_HOST: postgres_db
+
 volumes:
   pg_data:
   pgadmin_data: 

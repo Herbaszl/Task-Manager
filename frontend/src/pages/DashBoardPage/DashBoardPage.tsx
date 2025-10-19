@@ -5,8 +5,9 @@ import { useAuth } from '../../contexts/AuthContext';
 import { Spinner } from '../../contexts/Spinner';
 import { CreateTaskForm } from '../../components/CreateTaskForm';
 import { ConfirmationModal } from '../../components/ConfirmationModal';
+import { EditTaskModal } from '../../components/EditTaskModal'; 
 import { type Task } from '../../services/api'; 
-import { useTasks } from '../../hooks/useTasks';
+import { useTasks } from '../../hooks/useTasks'; 
 
 
 const StatusStyles: Record<Task['status'], string> = {
@@ -24,18 +25,23 @@ export function DashBoardPage(){
         error, 
         addTask, 
         deleteTask,
+        updateTaskLocally 
     } = useTasks(); 
 
     const [isLogoutModalOpen, setIsLogoutModalOpen] = useState(false);
     const [taskIdToDelete, setTaskIdToDelete] = useState<string | null>(null);
     const [isDeleting, setIsDeleting] = useState(false);
     
- 
+    const [taskToEdit, setTaskToEdit] = useState<Task | null>(null); 
     
-
     const handleTaskCreated = useCallback((newTask: Task) => {
         addTask(newTask);
     }, [addTask]);
+    
+    const handleConfirmLogout = () => {
+        setIsLogoutModalOpen(false);
+        logout();
+    };
     
     const handleOpenDeleteModal = useCallback((taskId: string) => {
         setTaskIdToDelete(taskId);
@@ -60,12 +66,19 @@ export function DashBoardPage(){
         }
     }, [taskIdToDelete, handleCloseDeleteModal, deleteTask]);
 
-    const handleConfirmLogout = () => {
-        setIsLogoutModalOpen(false);
-        logout();
-    };
+    const handleOpenEditModal = useCallback((task: Task) => {
+        setTaskToEdit(task); 
+    }, []);
+    
+    const handleCloseEditModal = useCallback(() => {
+        setTaskToEdit(null);
+    }, []);
 
- 
+    const handleTaskUpdated = useCallback((updatedTask: Task) => {
+        updateTaskLocally(updatedTask); 
+        handleCloseEditModal(); 
+    }, [updateTaskLocally, handleCloseEditModal]);
+
 
     return(
         <div className="min-h-dvh bg-gray-50">
@@ -110,6 +123,7 @@ export function DashBoardPage(){
                                 
                                 <div className="flex space-x-1">
                                     <button 
+                                        onClick={() => handleOpenEditModal(task)} // ✅ CONECTADO: Abre o modal de edição
                                         className="text-blue-600 hover:text-blue-800 transition duration-150 p-1"
                                         title="Editar Tarefa"
                                     >
@@ -165,7 +179,14 @@ export function DashBoardPage(){
             />
             )}
             
-      
+            {taskToEdit && (
+                <EditTaskModal 
+                    isOpen={!!taskToEdit}
+                    onClose={handleCloseEditModal}
+                    task={taskToEdit}
+                    onTaskUpdated={handleTaskUpdated}
+                />
+            )}
         </div>
     );
 }

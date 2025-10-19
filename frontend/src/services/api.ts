@@ -7,15 +7,6 @@ export const api = axios.create({
 });
 
 
-// export const setAuthToken = (token: string | null) => {
-// if(token){
-// api.defaults.headers.common['Authorization'] = `Bearer ${token}`;
-// console.log('Token adicionado ao header Axios: ', token);
-// }else{
-//     delete api.defaults.headers.common['Authorization'];
-//     console.log('Token removido do header Axios')
-// }
-// };
 
 type ApiRegisterData = Omit<RegisterFormInputs, 'confirmPassword'>;
 
@@ -34,6 +25,7 @@ export const apiLogin = async (data: LoginFormInputs) => {
 };
 
 
+
 /**
  * @param data 
  * @returns 
@@ -43,3 +35,20 @@ export const apiRegister = async (data: ApiRegisterData) => {
     const response = await api.post('/auth/register', data);
     return response.data;
 }
+
+export interface Task{
+    id: string,
+    title: string;
+    description: string | null;
+    status: 'pending' | 'in-progress' | 'done';
+    createdAt: string;
+    updatedAt: string;
+}
+
+
+export const apiGetTasks = async (): Promise<Task[]> => {
+    const response = await api.get('/tasks');
+    return response.data;
+};
+
+

@@ -1,5 +1,5 @@
 import axios from "axios";
-import type { LoginFormInputs } from "../schemas/loginschema";
+import type { LoginFormInputs } from "../schemas/loginSchema";
 import type {RegisterFormInputs} from '../schemas/registerSchema';
 import type { CreateTaskFormValues } from "../schemas/task.schema";
 

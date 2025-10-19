@@ -1,7 +1,7 @@
 import React from 'react';
 import type { UseFormRegister, FieldError } from 'react-hook-form'
 
-interface InputProps extends React.inputHTMLAttributes<HTMLInputElement>{
+interface InputProps extends React.InputHTMLAttributes<HTMLInputElement>{
     label: string;
     fieldName: string;
     register: UseFormRegister<any>
@@ -21,8 +21,8 @@ export function Input({ label, fieldName, register, error, ...rest }: InputProps
             ? 'border-red-500 focus:ring-red-500 focus:border-red-500'
             : 'border-gray-300 focus:ring-indigo-500 focus:border-indigo-500'
         }`}
-        {...register(fieldName)} // Registra o input no RHF
-        {...rest} // Outras props (type, placeholder, etc.)
+        {...register(fieldName)} 
+        {...rest} 
       />
       {error && <p className="mt-1 text-xs text-red-600">{error.message}</p>}
     </div>

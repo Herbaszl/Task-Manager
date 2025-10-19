@@ -43,7 +43,6 @@ services:
 
     
     environment:
-    
       DB_HOST: postgres_db
 
 volumes:

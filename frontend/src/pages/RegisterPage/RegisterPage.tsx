@@ -33,7 +33,7 @@ export function RegisterPage (){
         const{confirmPassword, ...apiData} = data;
         try{
         await apiRegister(apiData)
-        navigate('/login', { state: { message: 'Registro realizado com sucesso! Faça o login.' } });
+        navigate('/login', { state: { message: 'Conta criada com sucesso! Faça o login.' } });
             } catch (error: any) {
             
             console.error('Erro no registro', error);
@@ -94,7 +94,7 @@ export function RegisterPage (){
                     register={register}
                     error={errors.confirmPassword}/>
                     
-                    <button type="submit" disabled={isSubmitting} className="w-full bg-indigo-600 text-white py-2 px-4 rounded-md hover: bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 disabled:opacity-50">
+                    <button type="submit" disabled={isSubmitting} className="w-full bg-indigo-600 text-white py-2 px-4 rounded-md hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 disabled:opacity-50">
                         {isSubmitting ? 'Registrando...' : 'Registrar'}
                     </button>
                     <p className="mt-4 text-center text-sm text-gray-600">

@@ -1,5 +1,5 @@
 import {useForm} from 'react-hook-form';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom'; 
 import type { SubmitHandler} from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -9,6 +9,7 @@ import { Input } from '../../components/input';
 import { apiLogin } from '../../services/api';
 import { useAuth } from '../../contexts/AuthContext';
 import { SmallSpinner, Spinner } from '../../contexts/Spinner';
+import { useLocation } from 'react-router-dom';
 
 const wait = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms))
 
@@ -18,6 +19,18 @@ export function LoginPage()
     const {login} = useAuth();
     const navigate = useNavigate();
     const [apiError, setApiError] = useState<string | null>(null);
+    const location = useLocation();
+    const successMessage = location.state?.message;
+
+   useEffect(() => {
+        if (successMessage) {
+            
+            const timer = setTimeout(() => {
+                navigate(location.pathname, { replace: true, state: {} });
+            }, 10000); 
+            return () => clearTimeout(timer); 
+        }
+    }, [successMessage, location.pathname, navigate]);
      
     const{
         register, 
@@ -61,6 +74,11 @@ export function LoginPage()
                 <h1 className="text-2xl font-semibold text-center text-gray-800 mb-6">
                     Entrar
                 </h1>
+                {successMessage && (
+                <div className="mb-4 rounded-md border border-green-300 bg-green-50 p-3 text-green-700 text-center text-sm">
+                         {successMessage}
+                    </div>
+                )}
                 {apiError&& (
                     <div className='mb-4 rounded-md border border-red-300 bg-red-50 p-3 text-center text-sm text-red-700'>
                         {apiError}

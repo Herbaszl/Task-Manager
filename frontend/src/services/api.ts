@@ -1,4 +1,7 @@
 import axios from "axios";
+import type { LoginFormInputs } from "../schemas/loginschema";
+import type {RegisterFormInputs} from '../schemas/registerSchema';
+import type { CreateTaskFormValues } from "../schemas/task.schema";
 
 const API_BASE_URL = 'http://localhost:3000';
 
@@ -10,8 +13,6 @@ export const api = axios.create({
 
 type ApiRegisterData = Omit<RegisterFormInputs, 'confirmPassword'>;
 
-import type { LoginFormInputs } from "../schemas/loginschema";
-import type {RegisterFormInputs} from '../schemas/registerSchema';
 
 /**
  
@@ -36,13 +37,23 @@ export const apiRegister = async (data: ApiRegisterData) => {
     return response.data;
 }
 
+export type TaskStatus = 'Pendente' | 'A caminho' | 'Feita';
+
 export interface Task{
     id: string,
     title: string;
     description: string | null;
-    status: 'pending' | 'in-progress' | 'done';
+    status: TaskStatus;
     createdAt: string;
     updatedAt: string;
+}
+
+export interface UpdateTaskData{
+    title?: string;
+    description?: string;
+    status?: TaskStatus;
+    deleted?: Boolean
+
 }
 
 
@@ -52,3 +63,15 @@ export const apiGetTasks = async (): Promise<Task[]> => {
 };
 
 
+export const apiCreateTask = async (data: CreateTaskFormValues): Promise<Task> => {
+    const response = await api.post('/tasks', data);
+    return response.data;}
+
+export async function apiUpdateTask(taskId: string, data:UpdateTaskData): Promise<Task>{
+    const response = await api.patch(`/tasks/${taskId}`, data);
+    return response.data;
+}
+
+export async function apiSoftDeleteTask(taskId: string): Promise<void> {
+    await apiUpdateTask(taskId, { deleted: true });
+}

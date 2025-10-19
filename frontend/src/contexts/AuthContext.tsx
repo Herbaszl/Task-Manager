@@ -61,7 +61,7 @@ export function AuthProvider({children}: AuthProviderProps){
         setToken(newToken);
         sessionStorage.setItem('authToken', newToken);
         api.defaults.headers.common['Authorization'] = `Bearer ${newToken}`;
-        console.log('Token adicionado ao header Axios', newToken);
+        
     
         if(userData){
             setUser(userData);
@@ -81,7 +81,6 @@ export function AuthProvider({children}: AuthProviderProps){
         sessionStorage.removeItem('authUser');
         
         delete api.defaults.headers.common['Authorization'];
-        console.log('Token removido do header Axios.')
     };
 
     const value = {

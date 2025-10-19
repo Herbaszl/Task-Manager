@@ -1,15 +1,23 @@
 import {useForm} from 'react-hook-form';
+import { Link } from 'react-router-dom'; 
 import type { SubmitHandler} from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
+import { useNavigate } from 'react-router-dom';
+import { useState } from 'react';
+
 import { registerSchema } from '../../schemas/registerSchema';
 import type { RegisterFormInputs } from '../../schemas/registerSchema'; 
 import { Input } from '../../components/input'; 
-import { Link } from 'react-router-dom'; 
 
+import { apiRegister } from '../../services/api';
 
 
 
 export function RegisterPage (){
+
+    const navigate = useNavigate();
+    const [apiError, setApiError] = useState<string | null>(null);
+
 
     const{
         register, 
@@ -20,8 +28,23 @@ export function RegisterPage (){
     });
 
 
-    const onSubmit: SubmitHandler<RegisterFormInputs> = (data) => {
-        console.log('Dados do Registro', data);
+    const onSubmit: SubmitHandler<RegisterFormInputs> = async (data) => {
+        setApiError(null);
+        const{confirmPassword, ...apiData} = data;
+        try{
+        await apiRegister(apiData)
+        navigate('/login', { state: { message: 'Registro realizado com sucesso! Faça o login.' } });
+            } catch (error: any) {
+            
+            console.error('Erro no registro', error);
+
+            if(error.response && error.response.data && error.response.data.message){
+                setApiError(error.response.data.message);
+            } else {
+                setApiError('Erro ao tentar registrar. Tente novamente!');
+            }
+        } 
+    
     };
     
 
@@ -33,6 +56,11 @@ export function RegisterPage (){
                 <h1 className="text-2xl font-semibold text-center text-gray-800 mb-6">
                     Registrar
                 </h1>
+                {apiError && (
+                    <div className="mb-4 rounded-md border border-red-300 bg-red-50 p-3 text-red-700 text-center text-sm">
+                        {apiError}
+                    </div>
+                )}
                 <form onSubmit={handleSubmit(onSubmit)}>
                     <Input
                     label="Nome Completo"

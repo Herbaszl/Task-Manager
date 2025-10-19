@@ -9,17 +9,18 @@ export const api = axios.create({
 
 // export const setAuthToken = (token: string | null) => {
 // if(token){
-// api.defaults.headers.common['Authorization] = `Bearer ${token}`;
+// api.defaults.headers.common['Authorization'] = `Bearer ${token}`;
 // console.log('Token adicionado ao header Axios: ', token);
 // }else{
-//     delete.api.defaults.headers.common['Authorization'];
+//     delete api.defaults.headers.common['Authorization'];
 //     console.log('Token removido do header Axios')
 // }
 // };
 
+type ApiRegisterData = Omit<RegisterFormInputs, 'confirmPassword'>;
+
 import type { LoginFormInputs } from "../schemas/loginschema";
 import type {RegisterFormInputs} from '../schemas/registerSchema';
-import { data } from "react-router-dom";
 
 /**
  
@@ -38,7 +39,7 @@ export const apiLogin = async (data: LoginFormInputs) => {
  * @returns 
  */
 
-export const apiRegister = async (data: RegisterFormInputs) => {
+export const apiRegister = async (data: ApiRegisterData) => {
     const response = await api.post('/auth/register', data);
     return response.data;
 }

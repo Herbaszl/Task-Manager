@@ -27,7 +27,7 @@ export function LogoutModal({isOpen, onClose, onConfirm}: LogoutModalProps){
                         Confirmar Saída
                     </h3>
                     <p className="text-sm text-gray-500">
-                        Você tem certeza que deseja sair da aplicação? <br></br> (Você será desconectado)
+                        Você tem certeza que deseja sair da aplicação? <br> </br> (Você será desconectado)
                     </p>
                 </div>
                 

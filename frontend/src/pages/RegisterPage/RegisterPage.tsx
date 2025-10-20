@@ -30,7 +30,9 @@ export function RegisterPage (){
 
     const onSubmit: SubmitHandler<RegisterFormInputs> = async (data) => {
         setApiError(null);
+        
         const{confirmPassword, ...apiData} = data;
+
         try{
         await apiRegister(apiData)
         navigate('/login', { state: { message: 'Conta criada com sucesso! Faça o login.' } });

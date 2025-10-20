@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from 'react';
+import { useState, useCallback } from 'react';
 import { FiEdit2, FiLogOut, FiTrash2 } from 'react-icons/fi';
 
 import { useAuth } from '../../contexts/AuthContext';

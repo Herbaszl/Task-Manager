@@ -1,5 +1,5 @@
 import { useState, useEffect, useCallback } from 'react';
-import { apiGetTasks, apiSoftDeleteTask, apiUpdateTask, type Task } from '../services/api';
+import { apiGetTasks, apiSoftDeleteTask, type Task } from '../services/api';
 import { useAuth } from '../contexts/AuthContext';
 
 interface UseTasksResult {

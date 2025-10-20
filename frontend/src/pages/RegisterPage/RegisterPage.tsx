@@ -7,7 +7,7 @@ import { useState } from 'react';
 
 import { registerSchema } from '../../schemas/registerSchema';
 import type { RegisterFormInputs } from '../../schemas/registerSchema'; 
-import { Input } from '../../components/input'; 
+import { Input } from '../../components/Input';
 
 import { apiRegister } from '../../services/api';
 

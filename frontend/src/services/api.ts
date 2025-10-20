@@ -52,7 +52,7 @@ export interface UpdateTaskData{
     title?: string;
     description?: string;
     status?: TaskStatus;
-    deleted?: Boolean
+    deleted?: boolean
 
 }
 

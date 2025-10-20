@@ -1,11 +1,10 @@
-import { useState } from 'react';
 import {Routes, Route, Navigate} from 'react-router-dom';
 
 import { LoginPage } from './pages/LoginPage/LoginPage';
 import { RegisterPage } from './pages/RegisterPage/RegisterPage';
 import { DashBoardPage } from './pages/DashBoardPage/DashBoardPage';
-import Robot from './assets/Robot.jpg'
 import { ProtectedRoute } from './components/ProtectedRoute';
+import Robot from './assets/Robot.jpg'
 
 function App() {
   return (

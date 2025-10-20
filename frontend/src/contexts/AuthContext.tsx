@@ -1,4 +1,4 @@
-import React, {createContext, useState, useContext, useEffect} from 'react';
+import {createContext, useState, useContext, useEffect} from 'react';
 import type { ReactNode } from 'react'
 import { api } from '../services/api';
 import { Spinner } from './Spinner';
@@ -48,11 +48,13 @@ export function AuthProvider({children}: AuthProviderProps){
                         sessionStorage.removeItem('authUser');
                     }
                 }
-                //...
             }
             setIsLoading(false);
         }, 2000)
 
+return () => {
+      clearTimeout(timer); 
+    };
         
     }, []);
 

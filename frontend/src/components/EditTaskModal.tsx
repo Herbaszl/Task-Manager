@@ -1,10 +1,9 @@
-import React, { useState } from 'react';
-import { FiX, FiSave, FiEdit2 } from 'react-icons/fi';
+import  { useState } from 'react';
+import { FiX, FiEdit2 } from 'react-icons/fi';
 import { apiUpdateTask, type Task} from '../services/api'; 
 import { useForm, type SubmitHandler } from 'react-hook-form';
 import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { SmallSpinner } from '../contexts/Spinner'; 
 import { createTaskSchema } from '../schemas/task.schema';
 
 

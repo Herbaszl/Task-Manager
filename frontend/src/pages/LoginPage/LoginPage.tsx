@@ -1,5 +1,5 @@
 import { useForm } from 'react-hook-form';
-import { useEffect, useState } from 'react';
+import { useEffect} from 'react';
 import { Link, useNavigate, useLocation } from 'react-router-dom'; 
 import type { SubmitHandler } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -38,7 +38,7 @@ export function LoginPage() {
         <div className="flex min-h-screen items-center justify-center bg-gray-100">
             <div className="w-full max-w-md bg-white p-8 rounded-lg shadow-md">
                 <h1 className="text-2xl font-semibold text-center text-gray-800 mb-6">
-                    Entrar
+                    Bem-Vindo
                 </h1>
                 
                 {successMessage && (

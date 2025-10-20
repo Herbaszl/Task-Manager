@@ -10,27 +10,12 @@ export const api = axios.create({
 });
 
 
-
 type ApiRegisterData = Omit<RegisterFormInputs, 'confirmPassword'>;
-
-
-/**
- 
- * @param data 
- * @returns 
- */
 
 export const apiLogin = async (data: LoginFormInputs) => {
     const response = await api.post('/auth/login', data);
     return response.data;
 };
-
-
-
-/**
- * @param data 
- * @returns 
- */
 
 export const apiRegister = async (data: ApiRegisterData) => {
     const response = await api.post('/auth/register', data);
@@ -40,7 +25,7 @@ export const apiRegister = async (data: ApiRegisterData) => {
 export type TaskStatus = 'Pendente' | 'A caminho' | 'Feita';
 
 export interface Task{
-    id: string,
+    id: string;
     title: string;
     description: string | null;
     status: TaskStatus;
@@ -53,7 +38,6 @@ export interface UpdateTaskData{
     description?: string;
     status?: TaskStatus;
     deleted?: boolean
-
 }
 
 
@@ -65,7 +49,8 @@ export const apiGetTasks = async (): Promise<Task[]> => {
 
 export const apiCreateTask = async (data: CreateTaskFormValues): Promise<Task> => {
     const response = await api.post('/tasks', data);
-    return response.data;}
+    return response.data;
+}
 
 export async function apiUpdateTask(taskId: string, data:UpdateTaskData): Promise<Task>{
     const response = await api.patch(`/tasks/${taskId}`, data);
@@ -73,5 +58,5 @@ export async function apiUpdateTask(taskId: string, data:UpdateTaskData): Promis
 }
 
 export async function apiSoftDeleteTask(taskId: string): Promise<void> {
-    await apiUpdateTask(taskId, { deleted: true });
+    await api.delete(`/tasks/${taskId}`);
 }

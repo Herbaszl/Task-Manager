@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1760913784414" clover="3.2.0">
-  <project timestamp="1760913784414" name="All files">
+<coverage generated="1760926925098" clover="3.2.0">
+  <project timestamp="1760926925099" name="All files">
     <metrics statements="97" coveredstatements="92" conditionals="41" coveredconditionals="35" methods="20" coveredmethods="19" elements="158" coveredelements="146" complexity="0" loc="97" ncloc="97" packages="4" files="5" classes="5"/>
     <package name="pages.DashBoardPage">
       <metrics statements="47" coveredstatements="44" conditionals="22" coveredconditionals="19" methods="14" coveredmethods="13"/>
-      <file name="DashBoardPage.tsx" path="C:\Estudos\Frontend\task-manager\frontend\src\pages\DashBoardPage\DashBoardPage.tsx">
+      <file name="DashBoardPage.tsx" path="/app/src/pages/DashBoardPage/DashBoardPage.tsx">
         <metrics statements="47" coveredstatements="44" conditionals="22" coveredconditionals="19" methods="14" coveredmethods="13"/>
         <line num="1" count="1" type="stmt"/>
         <line num="2" count="1" type="stmt"/>
@@ -57,7 +57,7 @@
     </package>
     <package name="pages.LoginPage">
       <metrics statements="20" coveredstatements="19" conditionals="8" coveredconditionals="6" methods="3" coveredmethods="3"/>
-      <file name="LoginPage.tsx" path="C:\Estudos\Frontend\task-manager\frontend\src\pages\LoginPage\LoginPage.tsx">
+      <file name="LoginPage.tsx" path="/app/src/pages/LoginPage/LoginPage.tsx">
         <metrics statements="20" coveredstatements="19" conditionals="8" coveredconditionals="6" methods="3" coveredmethods="3"/>
         <line num="1" count="1" type="stmt"/>
         <line num="2" count="1" type="stmt"/>
@@ -83,7 +83,7 @@
     </package>
     <package name="pages.RegisterPage">
       <metrics statements="23" coveredstatements="22" conditionals="9" coveredconditionals="8" methods="2" coveredmethods="2"/>
-      <file name="RegisterPage.tsx" path="C:\Estudos\Frontend\task-manager\frontend\src\pages\RegisterPage\RegisterPage.tsx">
+      <file name="RegisterPage.tsx" path="/app/src/pages/RegisterPage/RegisterPage.tsx">
         <metrics statements="23" coveredstatements="22" conditionals="9" coveredconditionals="8" methods="2" coveredmethods="2"/>
         <line num="1" count="1" type="stmt"/>
         <line num="2" count="1" type="stmt"/>
@@ -99,25 +99,25 @@
         <line num="26" count="18" type="stmt"/>
         <line num="31" count="18" type="stmt"/>
         <line num="32" count="2" type="stmt"/>
-        <line num="33" count="2" type="stmt"/>
         <line num="34" count="2" type="stmt"/>
-        <line num="35" count="2" type="stmt"/>
-        <line num="36" count="1" type="stmt"/>
-        <line num="39" count="1" type="stmt"/>
-        <line num="41" count="1" type="cond" truecount="4" falsecount="1"/>
-        <line num="42" count="1" type="stmt"/>
-        <line num="44" count="0" type="stmt"/>
-        <line num="53" count="18" type="stmt"/>
+        <line num="36" count="2" type="stmt"/>
+        <line num="37" count="2" type="stmt"/>
+        <line num="38" count="1" type="stmt"/>
+        <line num="41" count="1" type="stmt"/>
+        <line num="43" count="1" type="cond" truecount="4" falsecount="1"/>
+        <line num="44" count="1" type="stmt"/>
+        <line num="46" count="0" type="stmt"/>
+        <line num="55" count="18" type="stmt"/>
       </file>
     </package>
     <package name="schemas">
       <metrics statements="7" coveredstatements="7" conditionals="2" coveredconditionals="2" methods="1" coveredmethods="1"/>
-      <file name="loginSchema.ts" path="C:\Estudos\Frontend\task-manager\frontend\src\schemas\loginSchema.ts">
+      <file name="loginSchema.ts" path="/app/src/schemas/loginSchema.ts">
         <metrics statements="2" coveredstatements="2" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
         <line num="1" count="1" type="stmt"/>
         <line num="3" count="1" type="stmt"/>
       </file>
-      <file name="registerSchema.ts" path="C:\Estudos\Frontend\task-manager\frontend\src\schemas\registerSchema.ts">
+      <file name="registerSchema.ts" path="/app/src/schemas/registerSchema.ts">
         <metrics statements="5" coveredstatements="5" conditionals="2" coveredconditionals="2" methods="1" coveredmethods="1"/>
         <line num="1" count="1" type="stmt"/>
         <line num="3" count="1" type="stmt"/>

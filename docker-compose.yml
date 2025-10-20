@@ -1,58 +1,62 @@
-services:
-  postgres_db:
-    image: postgres:15
-    container_name: task_manager_db
-    restart: always
-    ports:
-      - "5432:5432"
-    environment:
-      POSTGRES_USER: admin
-      POSTGRES_PASSWORD: admin
-      POSTGRES_DB: task_manager
+    services:
+      postgres_db:
+        image: postgres:15
+        container_name: task_manager_db
+        restart: always
+        ports:
+          - "5432:5432"
+        environment:
+          POSTGRES_USER: admin
+          POSTGRES_PASSWORD: admin
+          POSTGRES_DB: task_manager
+        volumes:
+          - pg_data:/var/lib/postgresql/data
+    
+      pgadmin:
+        image: dpage/pgadmin4
+        container_name: task_manager_pgadmin
+        restart: always
+        environment:
+          PGADMIN_DEFAULT_EMAIL: admin@admin.com
+          PGADMIN_DEFAULT_PASSWORD: admin
+        ports:
+          - "8080:80"
+        depends_on:
+          - postgres_db
+        volumes:
+          - pgadmin_data:/var/lib/pgadmin
+    
+      backend:
+        container_name: task_manager_backend
+        build: ./backend
+        ports:
+          - "3000:3000"
+        restart: always
+        depends_on:
+          - postgres_db
+        env_file:
+          - ./backend/.env
+        environment:
+          DB_HOST: postgres_db
+        volumes:
+          - ./backend:/app
+          - /app/node_modules
+        command: npm run start:dev
+    
+      frontend:
+        container_name: task_manager_frontend
+        build:
+          context: ./frontend
+          dockerfile: Dockerfile.dev
+        ports:
+          - "5173:5173"
+        restart: always
+        depends_on:
+          - backend
+        volumes:
+          - ./frontend:/app
+          - /app/node_modules
+    
     volumes:
-      - pg_data:/var/lib/postgresql/data
-
-  pgadmin:
-    image: dpage/pgadmin4
-    container_name: task_manager_pgadmin
-    restart: always
-    environment:
-      PGADMIN_DEFAULT_EMAIL: admin@admin.com
-      PGADMIN_DEFAULT_PASSWORD: admin
-    ports:
-      - "8080:80"
-    depends_on:
-      - postgres_db
-    volumes:
-      - pgadmin_data:/var/lib/pgadmin
-
-  backend:
-    container_name: task_manager_backend
-    build: ./backend
-    ports:
-      - "3000:3000"
-    restart: always
-    depends_on:
-      - postgres_db
-    env_file:
-      - ./backend/.env
-    environment:
-      DB_HOST: postgres_db
-
-  frontend:
-    container_name: task_manager_frontend
-    build:
-      context: ./frontend      
-      dockerfile: dockerfile.dev
-    ports:
-      - "5173:5173"
-    restart: always
-    depends_on:
-      - backend
-    volumes:
-      - ./frontend:/app
-      - /app/node_modules
-
-volumes:
-  pg_data:
-  pgadmin_data:
+      pg_data:
+      pgadmin_data:

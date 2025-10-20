@@ -49,16 +49,17 @@ export class TasksService {
         return this.tasksRepository.save(task);
     }
 
-    async remove(id: string, userId: string): Promise<void>{
-        const result = await this.tasksRepository.softDelete({
-            id,
-            user: {id: userId},
-        });
+   async remove(id: string, userId: string): Promise<void>{
+    const result = await this.tasksRepository.softDelete({
+        id,
+        user: {id: userId}, 
+    });
 
-        if(result.affected === 0 ){
-            throw new NotFoundException('Tarefa não encontrada')
-        }
+    
+    if(result.affected === 0 ){
+        throw new NotFoundException('Tarefa não encontrada ou não pertence ao usuário');
     }
+}
 }
 
 

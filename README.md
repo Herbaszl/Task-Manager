@@ -1,183 +1,130 @@
-**Task Manager** 
+# Task Manager (NestJS + React)
 
-Aplicação completa de gerenciamento de tarefas (To-Do List) desenvolvida como um desafio técnico full-stack. Permite que usuários se registrem, façam login de forma segura e gerenciem suas próprias tarefas.
+## 🌟 Visão Geral do Projeto
 
-**✨Funcionalidades Principais**
+Este é um projeto de gerenciamento de tarefas (To-Do List) desenvolvido como um desafio técnico Full-Stack. A aplicação oferece um ambiente seguro para que o usuário se registre, autentique-se via JWT e gerencie suas tarefas pessoais em um CRUD completo.
 
-Autenticação de Usuário:
+O foco principal é a **qualidade do código (SOLID/DRY)**, a **arquitetura limpa (Clean Architecture)** e a **containerização completa** para um ambiente de desenvolvimento robusto e portátil.
 
-Registo de novos usuários (nome, email, senha).
+---
 
-Login seguro utilizando email e senha.
+## ✨ Funcionalidades em Destaque
 
-Proteção de rotas da API e do frontend utilizando JWT (JSON Web Tokens).
+### 🔐 Autenticação e Segurança
 
-Gerenciamento de Tarefas (CRUD):
+* **Registro e Login:** Fluxo completo e seguro de cadastro/autenticação.
+* **Token JWT:** Utilização de JSON Web Tokens (JWT) via Passport.js para proteger todas as rotas de API e componentes de frontend.
+* **UX Aprimorada:** Modais de confirmação de logout e deleção.
 
-Criação de novas tarefas com título e descrição opcional.
+### 📝 Gerenciamento de Tarefas (CRUD Completo)
 
-Listagem apenas das tarefas pertencentes ao usuário autenticado.
+* **Criação:** Título e descrição opcionais.
+* **Listagem:** Exibe apenas as tarefas pertencentes ao usuário autenticado.
+* **Edição (Update):** Modal dedicado para atualizar título, descrição e **status** (`Pendente`, `Em Andamento`, `Finalizada`).
+* **Remoção Lógica (Soft Delete):** A tarefa é marcada com a data de exclusão (`deleted_at`), mantendo a integridade dos dados no histórico.
 
-Atualização de título, descrição ou status ('Pendente', 'Em Progresso', 'Feita') de tarefas existentes.
+---
 
-Remoção de tarefas (Soft Delete: a tarefa é marcada como removida, mas não apagada fisicamente).
+## 🛠️ Tecnologias Utilizadas
 
-Interface Intuitiva: Frontend construído com React e estilizado com Tailwind CSS para uma experiência limpa e responsiva.
+| Camada | Ferramenta | Descrição |
+| :--- | :--- | :--- |
+| **Backend** | **Nest.js** | Framework Node.js para APIs robustas e escaláveis, seguindo padrões modulares. |
+| **Persistência** | **PostgreSQL** | Banco de dados relacional profissional. |
+| **ORM/DB** | **TypeORM** | Mapeamento Objeto-Relacional, com suporte a **Migrations** e **Soft Delete**. |
+| **Frontend** | **React** (Vite) | Biblioteca para a interface do usuário, com alta performance e Hot-Reload. |
+| **Estilo** | **Tailwind CSS** | Framework CSS utility-first para design moderno e responsivo. |
+| **Formulários** | **React Hook Form & Zod** | Validação robusta e tipada de formulários. |
+| **Arquitetura** | **Custom Hooks** | Uso de `useTasks` e `useLogin` para aplicar **SRP/DRY** na gestão de estado do frontend. |
+| **DevOps** | **Docker & Docker Compose** | Containerização completa para garantir ambiente de desenvolvimento idêntico à produção. |
+| **Testes** | **Jest & RTL** | Cobertura unitária completa para Services/Controllers (Backend) e Componentes/Hooks (Frontend). |
 
-Ambiente Containerizado: Aplicação totalmente configurada para rodar com Docker e Docker Compose, facilitando a configuração e execução em ambiente de desenvolvimento.
+---
 
-**🛠️ Tecnologias Utilizadas**
+## 🚀 Como Executar o Projeto Localmente
 
-**Backend:**
+### Pré-requisitos
 
-Framework: Nest.js
+Certifique-se de ter instalado em seu sistema:
 
-Linguagem: TypeScript
+1.  **[Docker]**
+2.  **Docker Compose** (geralmente incluído no Docker Desktop)
 
-Banco de Dados: PostgreSQL
+### 1. Clonar o Repositório
 
-ORM: TypeORM
-
-Autenticação: JWT (Passport.js)
-
-Validação: class-validator, class-transformer
-
-**Frontend:**
-
-Framework: React (com Vite)
-
-Linguagem: TypeScript
-
-Estilização: Tailwind CSS (v3)
-
-Gerenciamento de Estado: React Context API
-
-Roteamento: React Router DOM
-
-Formulários: React Hook Form & Zod
-
-Requisições HTTP: Axios
-
-DevOps & Banco de Dados:
-
-Containerização: Docker, Docker Compose
-
-Gerenciador de BD (Opcional): PgAdmin 4 (incluído no Docker Compose)
-
-Testes:
-
-Backend: Jest
-
-Frontend: Jest, React Testing Library, User Event
-
-
-
-**🚀 Como Executar o Projeto Localmente (Ambiente de Desenvolvimento)**
-
-Pré-requisitos
-
-Docker: Instruções de Instalação
-
-Docker Compose: Geralmente incluído na instalação do Docker Desktop.
-
-1. Clonar o Repositório
-
-git clone github.com/Herbaszl
+```bash
+git clone [github.com/Herbaszl/task-manager](https://github.com/Herbaszl/task-manager)
 cd task-manager
+```
 
-
-2. Configurar Variáveis de Ambiente (Backend)
-
-O backend precisa de um arquivo .env para as credenciais do banco de dados e o segredo do JWT.
+### 2. Configurar Variáveis de Ambiente (backend/.env)
+O backend precisa de um arquivo .env para credenciais e segredo JWT.
 
 Navegue até a pasta backend: cd backend
 
-Crie um arquivo chamado .env.
+Crie o arquivo .env e adicione o seguinte conteúdo:
 
-Adicione o seguinte conteúdo, substituindo o JWT_SECRET por uma string aleatória e segura:
-
+```bash
 # backend/.env
 
-# Credenciais do Banco de Dados (devem coincidir com docker-compose.yml)
+# Credenciais do Banco de Dados (consistentes com docker-compose.yml)
 DB_HOST=localhost
 DB_PORT=5432
 DB_USER=admin
 DB_PASSWORD=admin
 DB_DATABASE=task_manager
 
-# Segredo para assinatura dos tokens JWT (IMPORTANTE: Use um valor seguro)
-JWT_SECRET=SuaStringSecretaMuitoLongaEAleatoriaAqui!12345
+# Segredo para assinatura dos tokens JWT (MUITO IMPORTANTE: Use um valor seguro)
+JWT_SECRET=StringSecretaEBemBemLongaHaHa!12345
+```
+ Volte para a raíz 
+```bash
+cd ...
+```
 
+### 3. Construir e Iniciar os Contêineres
 
-Volte para a pasta raiz do projeto: cd ..
+Na raiz do projeto (task-manager), execute o comando de orquestração:
 
-Nota: O DB_HOST=localhost é usado pelo script de migração que roda a partir da sua máquina. O Docker Compose sobrescreverá esta variável para DB_HOST=postgres_db para a comunicação entre os contêineres backend e postgres_db.
-
-3. Construir e Iniciar os Contêineres
-
-Na raiz do projeto (task-manager), execute o seguinte comando:
-
+```bash
 docker-compose up --build -d
+```
+⏳ Nota: A primeira execução pode demorar, pois o Docker constrói e instala todas as dependências do zero.
 
+### 4. Iniciar as Migrations
+Com os serviços ativos, popule o banco de dados com as tabelas necessárias:
 
---build: Garante que as imagens Docker para o backend e frontend sejam (re)construídas.
-
--d: Executa os contêineres em segundo plano (detached mode).
-
-Atenção: A primeira execução deste comando pode demorar alguns minutos, pois ele precisa descarregar e instalar todas as dependências. As execuções seguintes serão muito mais rápidas graças ao cache do Docker.
-
-Aguarde alguns momentos para que todos os serviços iniciem. Você pode verificar o status com docker ps.
-
-4. Executar as Migrations do Banco de Dados
-
-Com os contêineres rodando, crie as tabelas no banco de dados executando as migrations do TypeORM:
-
+```bash
 docker-compose exec backend npm run migration:run
+```
+
+---
+
+## 💻 Acesso ao Aplicativo
+| Serviço | Endereço | Credencial Padrão (Para Logar) |
+| :--- | :--- | :--- |
+| Frontend (React) | `http://localhost:5173` | Faça o Registro/Login primeiro |
+| Backend (API NestJS) | `http://localhost:3000` | — |
+| PgAdmin 4 (Gerenciamento) | `http://localhost:8080` | Host: `postgres_db`, User: `admin@admin.com`, Pass: `admin` |
+
+---
 
 
-**✅ Aplicação Pronta!**
+## 🧪 Executando os Testes Unitários
 
-Após os passos acima, a aplicação estará acessível nos seguintes endereços:
+Para comprovar a qualidade do código (critério SOLID/DRY), execute os testes dentro dos contêineres:
+### Testes do Backend (TasksService, AuthController, etc.)
 
-Frontend (React App - Dev Mode): http://localhost:5173 (Com Hot-Reload)
-
-Backend (API NestJS - Dev Mode): http://localhost:3000 (Com Hot-Reload)
-
-PgAdmin (Gerenciador de BD): http://localhost:8080
-
-Login: admin@admin.com
-
-Senha: admin
-
-Para conectar ao banco dentro do PgAdmin:
-
-Host: postgres_db
-
-Porta: 5432
-
-Usuário: admin
-
-Senha: admin
-
-Database: task_manager
-
-**🧪 Executando os Testes**
-
-Os testes unitários podem ser executados dentro dos contêineres Docker para garantir consistência.
-
-Testes do Backend
-
-# Executar todos os testes
+```bash
 docker-compose exec backend npm run test
+```
 
+### Testes do Frontend (RTL: Formulários e Hooks)
 
-Testes do Frontend
-
-# Executar todos os testes
+```bash
 docker-compose exec frontend yarn jest
-
-# Executar testes e ver cobertura
-docker-compose exec frontend yarn jest --coverage
-
+# OU para ver a cobertura:
+# docker-compose exec frontend yarn jest --coverage
+```
 
 

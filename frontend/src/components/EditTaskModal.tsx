@@ -7,10 +7,10 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { createTaskSchema } from '../schemas/task.schema';
 
 
-type TaskStatus = 'Pendente' | 'A caminho' | 'Feita';
+type TaskStatus = 'Pendente' | 'Em Andamento' | 'Finalizada';
 
 export const updateTaskSchema = createTaskSchema.partial().extend({
-    status: z.enum(['Pendente', 'A caminho', 'Feita'] as [TaskStatus, ...TaskStatus[]], {
+    status: z.enum(['Pendente', 'Em Andamento', 'Finalizada'] as [TaskStatus, ...TaskStatus[]], {
         message: "Selecione um status válido."
     }).default('Pendente'),
     title: z.string().min(3, "O título deve ter pelo menos 3 caracteres").max(100, "O título não pode exceder 100 caracteres").optional(),
@@ -28,8 +28,8 @@ type EditTaskFormInputs = {
 
 const statusOptions: {value: TaskStatus; label: string}[] = [
     { value: 'Pendente', label: 'Pendente' },
-    { value: 'A caminho', label: 'A caminho'},
-    { value: 'Feita', label: 'Feita'},
+    { value: 'Em Andamento', label: 'Em Andamento'},
+    { value: 'Finalizada', label: 'Finalizada'},
 ];
 
 interface EditTaskModalProps{

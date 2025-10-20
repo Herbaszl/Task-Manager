@@ -22,7 +22,7 @@ export const apiRegister = async (data: ApiRegisterData) => {
     return response.data;
 }
 
-export type TaskStatus = 'Pendente' | 'A caminho' | 'Feita';
+export type TaskStatus = 'Pendente' | 'Em Andamento' | 'Finalizada';
 
 export interface Task{
     id: string;

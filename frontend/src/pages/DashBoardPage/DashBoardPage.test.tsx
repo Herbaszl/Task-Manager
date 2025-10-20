@@ -48,7 +48,7 @@ jest.mock('../../components/EditTaskModal', () => ({
       <div data-testid="edit-task-modal">
         <h2>Editar Tarefa: {task?.title}</h2>
         <button onClick={onClose}>Fechar Edição</button>
-        <button data-testid="mock-update-button" onClick={() => onTaskUpdated({ ...task, title: 'Título Editado Mock', status: 'Feita' })}>
+        <button data-testid="mock-update-button" onClick={() => onTaskUpdated({ ...task, title: 'Título Editado Mock', status: 'Finalizada' })}>
           Simular Edição
         </button>
       </div>
@@ -63,7 +63,7 @@ jest.mock('react-icons/fi', () => ({
 
 const mockTasks: Task[] = [
   { id: '1', title: 'Tarefa 1', description: 'Desc 1', status: 'Pendente', createdAt: '2025-10-19T10:00:00Z', updatedAt: '2025-10-19T10:00:00Z' },
-  { id: '2', title: 'Tarefa 2', description: null, status: 'Feita', createdAt: '2025-10-18T10:00:00Z', updatedAt: '2025-10-18T11:00:00Z' },
+  { id: '2', title: 'Tarefa 2', description: null, status: 'Finalizada', createdAt: '2025-10-18T10:00:00Z', updatedAt: '2025-10-18T11:00:00Z' },
 ];
 
 describe('DashBoardPage', () => {
@@ -158,7 +158,7 @@ describe('DashBoardPage', () => {
     expect(screen.getByText('Pendente')).toBeInTheDocument();
     expect(screen.getByText('Tarefa 2')).toBeInTheDocument();
     expect(screen.queryByText('Desc 2')).not.toBeInTheDocument();
-    expect(screen.getByText('Feita')).toBeInTheDocument();
+    expect(screen.getByText('Finalizada')).toBeInTheDocument();
     expect(screen.queryByTestId('spinner')).not.toBeInTheDocument();
     expect(screen.queryByText(/Nenhuma tarefa encontrada/i)).not.toBeInTheDocument();
   });
@@ -272,7 +272,7 @@ describe('DashBoardPage', () => {
     expect(mockUpdateTaskLocally).toHaveBeenCalledWith(expect.objectContaining({
       id: mockTasks[0].id,
       title: 'Título Editado Mock',
-      status: 'Feita',
+      status: 'Finalizada',
     }));
     expect(screen.queryByText(`Editar Tarefa: ${mockTasks[0].title}`)).not.toBeInTheDocument();
   });

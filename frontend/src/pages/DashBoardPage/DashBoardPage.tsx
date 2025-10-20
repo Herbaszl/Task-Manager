@@ -11,9 +11,9 @@ import { useTasks } from '../../hooks/useTasks';
 
 
 const StatusStyles: Record<Task['status'], string> = {
-    'Pendente': 'bg-yellow-100 text-yellow-800',
-    'A caminho': 'bg-blue-100 text-blue-800',
-    'Feita': 'bg-green-100 text-green-800',
+    'Pendente':'bg-yellow-100 text-yellow-800',
+    'Em Andamento':'bg-blue-100 text-blue-800',
+    'Finalizada':'bg-green-100 text-green-800',
 };
 
 export function DashBoardPage(){

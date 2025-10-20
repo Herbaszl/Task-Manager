@@ -12,8 +12,8 @@ import {
 
 export enum TaskStatus{
     PENDING = 'Pendente',
-    IN_PROGRESS = 'A caminho',
-    DONE = 'Feita'
+    IN_PROGRESS = 'Em Andamento',
+    DONE = 'Finalizada'
 }
 
 @Entity({name: 'tasks'})
